@@ -1,14 +1,10 @@
 package com.wellness;
 
 
-import io.github.cdimascio.dotenv.Dotenv;
-import com.mongodb.client.*;
 import com.wellness.GUIS.Login;
-import com.wellness.GUIS.Sign_Up;
+
 
 import javax.swing.SwingUtilities;
-
-import org.bson.Document;
 /**
  * Hello world!
  *
@@ -19,9 +15,6 @@ public class App
 {
     public static void main( String[] args )
     {
-
-        Dotenv dotenv = Dotenv.load();
-        String connectionString = dotenv.get("MONGODBKEY");
         
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -55,6 +48,5 @@ public class App
         // }
 
 
-        // System.out.println( "Hello World!" );
     }
 }

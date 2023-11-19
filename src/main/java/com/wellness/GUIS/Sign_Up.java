@@ -2,10 +2,10 @@ package com.wellness.GUIS;
 
 // import javax.imageio.ImageIO;
 import java.awt.*;
-
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,17 +13,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
-
 import com.wellness.Constants.Constants;
+import com.wellness.Backend.Validation;
+
 
 public class Sign_Up {
     private JFrame frame = new JFrame();
     private JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER,10,5));
-    private JLabel usernameText = new JLabel("Username"), heading = new JLabel("Sign Up"), passwordText = new JLabel("Password"), passwordReEnterText = new JLabel("Re-Enter Password"), signUp = new JLabel("Back to Login");
+    private JLabel usernameText = new JLabel("Username"), heading = new JLabel("Sign Up"), passwordText = new JLabel("Password"), passwordReEnterText = new JLabel("Re-Enter Password"), backToHome = new JLabel("Back to Login");
     private JTextField usernameInput = new JTextField();
     private JPasswordField passwordInput = new JPasswordField(), passwordInputConfirm = new JPasswordField();
-    private JButton login = new JButton("Create");
+    private JButton Create = new JButton("Create");
     ImageIcon image;
 
 
@@ -31,6 +31,7 @@ public class Sign_Up {
         initalize();
     }
 
+    
     private void initalize(){
 
         // Initialize the frame
@@ -58,12 +59,7 @@ public class Sign_Up {
         this.usernameText.setBounds(50,100, 100, 100);
         this.usernameText.setFont(new Font("Dialog", Font.BOLD, 20));
         this.usernameText.setForeground(Constants.TEXT_COLOR);
-
-        // Adding Password text
-        this.passwordText.setBounds(50,200, 100, 100);
-        this.passwordText.setFont(new Font("Dialog", Font.BOLD, 20));
-        this.passwordText.setForeground(Constants.TEXT_COLOR);
-
+       
 
         // Adding Username Input
         this.usernameInput.setBounds(60,175,275,35);
@@ -71,12 +67,17 @@ public class Sign_Up {
         this.usernameInput.setForeground(Constants.TEXT_COLOR);
         this.usernameInput.setFont(new Font("Dialog", Font.BOLD, 12));
 
+        // Adding Password text
+        this.passwordText.setBounds(50,200, 100, 100);
+        this.passwordText.setFont(new Font("Dialog", Font.BOLD, 20));
+        this.passwordText.setForeground(Constants.TEXT_COLOR);
+
 
         // Adding password Input
         this.passwordInput.setBounds(60,275,275,35);
         this.passwordInput.setBackground(Constants.BACKGROUN_COLOR_1);
         this.passwordInput.setForeground(Constants.TEXT_COLOR);
-        this.passwordInput.setFont(new Font("Dialog", Font.BOLD, 20));
+        this.passwordInput.setFont(new Font("Dialog", Font.BOLD, 12));
 
         //reenter password text
         this.passwordReEnterText.setBounds(50,325,275,35);
@@ -92,57 +93,81 @@ public class Sign_Up {
         this.passwordInputConfirm.setFont(new Font("Dialog", Font.BOLD, 20));
 
 
-        // Adding the sign up feature at the bottom
+        // Adding the back to home feature at the bottom
+        this.backToHome.setFont(new Font("Dialog", Font.BOLD, 15));
+        this.backToHome.setForeground(Constants.TEXT_COLOR);
+        this.backToHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        
+        // set the size dynamically
+        Dimension backtoHomeDimension = this.backToHome.getPreferredSize();
+        this.backToHome.setBounds(145, 540, (backtoHomeDimension.width + 5), backtoHomeDimension.height);
 
-        this.signUp.setBounds(145,480,100,100);
-        this.signUp.setFont(new Font("Dialog", Font.BOLD, 15));
-        this.signUp.setForeground(Constants.TEXT_COLOR);
-        this.signUp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
-
-        // Login Button
-        this.login.setBounds(145,475,100,30);
-        this.login.setHorizontalAlignment(JButton.CENTER);
-        this.login.setFont(new Font("Dialog", Font.BOLD, 15));
-        this.login.setForeground(Constants.TEXT_COLOR);
-        this.login.setBackground(Constants.BACKGROUN_COLOR_1);
-        this.login.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        this.signUp.addMouseListener(new MouseAdapter() {
+        this.backToHome.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e){
                 Sign_Up.this.frame.dispose();
-                Login main = new Login();
+                Login login = new Login();
+
+            }
+        });
+
+
+
+        // create User Button Button
+        this.Create.setBounds(145,475,100,30);
+        this.Create.setHorizontalAlignment(JButton.CENTER);
+        this.Create.setFont(new Font("Dialog", Font.BOLD, 15));
+        this.Create.setForeground(Constants.TEXT_COLOR);
+        this.Create.setBackground(Constants.BACKGROUN_COLOR_1);
+        this.Create.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        this.Create.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String username = Sign_Up.this.usernameInput.getText();
+                String password = new String(Sign_Up.this.passwordInput.getPassword());
+                String confirmPassword = new String(Sign_Up.this.passwordInputConfirm.getPassword());
                 
+                // creating instance of validation class to use functions from that class
+                Validation validator = new Validation();
+                
+                // checks to see if the information entered was valid
+                if (validator.validatePassword(username,password,confirmPassword, Constants.connectionString)){
+
+                } else {
+                    System.out.println("not valid");
+                }
+                
+                // if (validatePassword(username, password, confirmPassword, Constants.connectionString)) {
+                //     // Perform actions when the button is pressed and validation is successful
+                //     // For example, you might want to create a new user in the database
+                //     System.out.println("Validation successful. Creating user...");
+                // } else {
+                //     // Handle the case when validation fails
+                //     System.out.println("Validation failed. Please check your input.");
+                // }
             }
         });
 
 
         // Adding all of the elements 
         this.frame.add(heading);
-        this.frame.add(signUp);
+        this.frame.add(backToHome);
         this.frame.add(passwordReEnterText);
         this.frame.add(passwordInputConfirm);
         this.frame.add(usernameInput);
         this.frame.add(usernameText);
         this.frame.add(passwordText);
         this.frame.add(passwordInput);
-        this.frame.add(login);
+        this.frame.add(Create);
         this.frame.add(panel, BorderLayout.CENTER);
-
-
-
-
-
         
         // ADD THIS LATER ONCE YOU UNDERSTAND HOW TO INHERIT IT PROPERLY
         // this.testButton.addActionListener(this);
 
 
-        // panel.setBackground(Color.RED);
-
-        
-
 
 
     }
+
+
 }

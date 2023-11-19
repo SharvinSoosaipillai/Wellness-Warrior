@@ -6,11 +6,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-// import java.awt.image.BufferedImage;
-// import java.io.File;
-// import java.io.IOException;
-// import java.awt.Graphics;
-// import java.awt.event.ActionEvent;
 
 
 import javax.swing.ImageIcon;
@@ -72,17 +67,17 @@ public class Login extends JFrame{
         this.usernameText.setFont(new Font("Dialog", Font.BOLD, 20));
         this.usernameText.setForeground(Constants.TEXT_COLOR);
 
-        // Adding Password text
-        this.passwordText.setBounds(50,300, 200, 200);
-        this.passwordText.setFont(new Font("Dialog", Font.BOLD, 20));
-        this.passwordText.setForeground(Constants.TEXT_COLOR);
-
-
         // Adding Username Input
         this.usernameInput.setBounds(60,325,275,35);
         this.usernameInput.setBackground(Constants.BACKGROUN_COLOR_1);
         this.usernameInput.setForeground(Constants.TEXT_COLOR);
         this.usernameInput.setFont(new Font("Dialog", Font.BOLD, 12));
+
+
+        // Adding Password text
+        this.passwordText.setBounds(50,300, 200, 200);
+        this.passwordText.setFont(new Font("Dialog", Font.BOLD, 20));
+        this.passwordText.setForeground(Constants.TEXT_COLOR);
 
 
         // Adding password Input
@@ -97,6 +92,11 @@ public class Login extends JFrame{
         this.signUp.setFont(new Font("Dialog", Font.BOLD, 15));
         this.signUp.setForeground(Constants.TEXT_COLOR);
         this.signUp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        
+        Dimension signupDimension = this.signUp.getPreferredSize();
+        this.signUp.setBounds(165, 540, signupDimension.width, signupDimension.height);
+
+        // transfer use to the next page
         this.signUp.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e){
