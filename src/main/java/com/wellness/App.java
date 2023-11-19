@@ -4,6 +4,7 @@ package com.wellness;
 import io.github.cdimascio.dotenv.Dotenv;
 import com.mongodb.client.*;
 import com.wellness.GUIS.Login;
+import com.wellness.GUIS.Sign_Up;
 
 import javax.swing.SwingUtilities;
 
