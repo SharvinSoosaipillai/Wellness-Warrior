@@ -2,7 +2,7 @@ package com.wellness;
 
 
 import com.wellness.GUIS.Login;
-
+import com.wellness.GUIS.Main_Menu;
 
 import javax.swing.SwingUtilities;
 /**
@@ -20,33 +20,11 @@ public class App
             @Override
 
             public void run(){
-                Login main = new Login();
+                //Login main = new Login();
+                Main_Menu main = new Main_Menu();
             }
 
         });
-        
-
-        // All MongoDB Stuff is over here
-
-        // Connect to the MongoDB Atlas cluster
-        // try (MongoClient mongoClient = MongoClients.create(connectionString)) {
-        //     // Access the database and collection
-        //     MongoDatabase database = mongoClient.getDatabase("WellnessWarrior-db");
-        //     MongoCollection<Document> collection = database.getCollection("users");
-
-        //     // Create a document to insert
-        //     Document document = new Document("name", "bigmantheboidudas")
-        //             .append("age", 19)
-        //             .append("city", "Test City 3");
-
-        //     // Insert the document into the collection
-        //     collection.insertOne(document);
-
-        //     System.out.println("Document inserted successfully.");
-        // } catch (Exception e) {
-        //     System.err.println("Error: " + e.getMessage());
-        // }
-
 
     }
 }

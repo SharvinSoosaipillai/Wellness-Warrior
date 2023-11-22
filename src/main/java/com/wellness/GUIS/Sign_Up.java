@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -65,7 +66,7 @@ public class Sign_Up {
         this.usernameInput.setBounds(60,175,275,35);
         this.usernameInput.setBackground(Constants.BACKGROUN_COLOR_1);
         this.usernameInput.setForeground(Constants.TEXT_COLOR);
-        this.usernameInput.setFont(new Font("Dialog", Font.BOLD, 12));
+        this.usernameInput.setFont(new Font("Dialog", Font.BOLD, 20));
 
         // Adding Password text
         this.passwordText.setBounds(50,200, 100, 100);
@@ -77,7 +78,7 @@ public class Sign_Up {
         this.passwordInput.setBounds(60,275,275,35);
         this.passwordInput.setBackground(Constants.BACKGROUN_COLOR_1);
         this.passwordInput.setForeground(Constants.TEXT_COLOR);
-        this.passwordInput.setFont(new Font("Dialog", Font.BOLD, 12));
+        this.passwordInput.setFont(new Font("Dialog", Font.BOLD, 20));
 
         //reenter password text
         this.passwordReEnterText.setBounds(50,325,275,35);
@@ -134,13 +135,12 @@ public class Sign_Up {
                 if (validator.validatePassword(username,password,confirmPassword, Constants.connectionString)){
 
                     validator.addUser(username, password, Constants.connectionString);
-                    System.out.println("user added");
                     Sign_Up.this.frame.dispose();
                     Login login = new Login();
 
 
                 } else {
-                    System.out.println("not valid");
+                    JOptionPane.showMessageDialog(frame, "Username exists, please try a different name");
                 }
             }
         });

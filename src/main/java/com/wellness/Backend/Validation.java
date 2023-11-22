@@ -70,7 +70,6 @@ public class Validation {
             MongoDatabase database = mongoClient.getDatabase("WellnessWarrior-db");
             MongoCollection<Document> collection = database.getCollection("users");
 
-            long count = collection.countDocuments(Filters.eq("username", username));
             // Check if the username already exists
             Document userDocument = collection.find(Filters.eq("username", username)).first();
             if (userDocument != null) {

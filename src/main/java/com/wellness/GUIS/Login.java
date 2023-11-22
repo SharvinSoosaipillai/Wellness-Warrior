@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -71,7 +72,7 @@ public class Login extends JFrame{
         this.usernameInput.setBounds(60,325,275,35);
         this.usernameInput.setBackground(Constants.BACKGROUN_COLOR_1);
         this.usernameInput.setForeground(Constants.TEXT_COLOR);
-        this.usernameInput.setFont(new Font("Dialog", Font.BOLD, 12));
+        this.usernameInput.setFont(new Font("Dialog", Font.BOLD, 20));
 
 
         // Adding Password text
@@ -84,7 +85,7 @@ public class Login extends JFrame{
         this.passwordInput.setBounds(60,425,275,35);
         this.passwordInput.setBackground(Constants.BACKGROUN_COLOR_1);
         this.passwordInput.setForeground(Constants.TEXT_COLOR);
-        this.passwordInput.setFont(new Font("Dialog", Font.BOLD, 12));
+        this.passwordInput.setFont(new Font("Dialog", Font.BOLD, 20));
 
         // Adding the sign up feature at the bottom
 
@@ -126,11 +127,12 @@ public class Login extends JFrame{
                 
                 // checks to see if the information entered was valid
                 if (validator.checkUser(username,password, Constants.connectionString)){
-                    System.out.println("valid username, logging in");
+                    Main_Menu main = new Main_Menu();
+                    Login.this.frame.dispose();
 
 
                 } else {
-                    System.out.println("not valid");
+                    JOptionPane.showMessageDialog(frame, "Invalid Information, Please try again");
                 }
             }
         });
@@ -147,24 +149,6 @@ public class Login extends JFrame{
         this.frame.add(panel, BorderLayout.CENTER);
 
 
-
-
-
-        
-        // ADD THIS LATER ONCE YOU UNDERSTAND HOW TO INHERIT IT PROPERLY
-        // this.testButton.addActionListener(this);
-
-
-        // panel.setBackground(Color.RED);
-
-        
-
-
-
-    }
-
-    public void add(ActionListener ae){
-        
     }
 
 }
