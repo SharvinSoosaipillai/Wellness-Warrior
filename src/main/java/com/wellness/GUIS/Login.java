@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-
+import com.wellness.Backend.Validation;
 import com.wellness.Constants.Constants;
 
 public class Login extends JFrame{
@@ -115,6 +115,25 @@ public class Login extends JFrame{
         this.login.setForeground(Constants.TEXT_COLOR);
         this.login.setBackground(Constants.BACKGROUN_COLOR_1);
         this.login.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        this.login.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String username = Login.this.usernameInput.getText();
+                String password = new String(Login.this.passwordInput.getPassword());
+                
+                // creating instance of validation class to use functions from that class
+                Validation validator = new Validation();
+                
+                // checks to see if the information entered was valid
+                if (validator.checkUser(username,password, Constants.connectionString)){
+                    System.out.println("valid username, logging in");
+
+
+                } else {
+                    System.out.println("not valid");
+                }
+            }
+        });
 
 
         // Adding all of the elements 

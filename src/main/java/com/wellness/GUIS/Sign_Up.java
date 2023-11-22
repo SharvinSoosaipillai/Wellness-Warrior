@@ -133,18 +133,15 @@ public class Sign_Up {
                 // checks to see if the information entered was valid
                 if (validator.validatePassword(username,password,confirmPassword, Constants.connectionString)){
 
+                    validator.addUser(username, password, Constants.connectionString);
+                    System.out.println("user added");
+                    Sign_Up.this.frame.dispose();
+                    Login login = new Login();
+
+
                 } else {
                     System.out.println("not valid");
                 }
-                
-                // if (validatePassword(username, password, confirmPassword, Constants.connectionString)) {
-                //     // Perform actions when the button is pressed and validation is successful
-                //     // For example, you might want to create a new user in the database
-                //     System.out.println("Validation successful. Creating user...");
-                // } else {
-                //     // Handle the case when validation fails
-                //     System.out.println("Validation failed. Please check your input.");
-                // }
             }
         });
 
