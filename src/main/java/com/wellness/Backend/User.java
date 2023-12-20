@@ -7,6 +7,7 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Projections;
 import com.wellness.Constants.Constants;
 
 public class User {
@@ -20,72 +21,40 @@ public class User {
 
     protected int HeartRate,bloodLevel, humdity, temperature;
 
-    public int getHeartRate(){
+
+    private Document getUserInfoFromDatabase(String field) {
         try (MongoClient mongoClient = MongoClients.create(Constants.connectionString)) {
-            // Access the database and collection
             MongoDatabase database = mongoClient.getDatabase("WellnessWarrior-db");
             MongoCollection<Document> collection = database.getCollection("users");
-            Document userInfo = collection.find(Filters.eq("username", this.user)).first();
-
-            
-            return (userInfo.getInteger("HeartRate"));
+            return collection.find(Filters.eq("username", this.user)).projection(Projections.include(field)).first();
         } catch (Exception e) {
-            e.printStackTrace(); 
-            return 0;
+            e.printStackTrace();
+            return null;
         }
-    
+    }
+
+    public int getHeartRate() {
+        Document userInfo = getUserInfoFromDatabase("HeartRate");
+        return (userInfo != null) ? userInfo.getInteger("HeartRate", 0) : 0;
     }
 
 
-    public int getBloodOxygen(){
-        try (MongoClient mongoClient = MongoClients.create(Constants.connectionString)) {
-            // Access the database and collection
-            MongoDatabase database = mongoClient.getDatabase("WellnessWarrior-db");
-            MongoCollection<Document> collection = database.getCollection("users");
-            Document userInfo = collection.find(Filters.eq("username", this.user)).first();
+    public int getTemperature() {
+        Document userInfo = getUserInfoFromDatabase("Temperature");
+        return (userInfo != null) ? userInfo.getInteger("Temperature", 0) : 0;
+    }
 
-
-
-            return (userInfo.getInteger("BloodOxygenConcentration"));
-        } catch (Exception e) {
-            e.printStackTrace(); 
-            return 0;
-        }
-    
+    public int getHumidity() {
+        Document userInfo = getUserInfoFromDatabase("Humidity");
+        return (userInfo != null) ? userInfo.getInteger("Humidity", 0) : 0;
     }
 
 
-    public int getTemperature(){
-        try (MongoClient mongoClient = MongoClients.create(Constants.connectionString)) {
-            // Access the database and collection
-            MongoDatabase database = mongoClient.getDatabase("WellnessWarrior-db");
-            MongoCollection<Document> collection = database.getCollection("users");
-            Document userInfo = collection.find(Filters.eq("username", this.user)).first();
-
-            return (userInfo.getInteger("Temperature"));
-        } catch (Exception e) {
-            e.printStackTrace(); 
-            return 0;
-        }
-    
+    public int getBloodOxygen() {
+        Document userInfo = getUserInfoFromDatabase("BloodOxygenConcentration");
+        return (userInfo != null) ? userInfo.getInteger("BloodOxygenConcentration", 0) : 0;
     }
 
-
-    public int getHumidity(){
-        try (MongoClient mongoClient = MongoClients.create(Constants.connectionString)) {
-            // Access the database and collection
-            MongoDatabase database = mongoClient.getDatabase("WellnessWarrior-db");
-            MongoCollection<Document> collection = database.getCollection("users");
-            Document userInfo = collection.find(Filters.eq("username", this.user)).first();
-            
-            
-            return (userInfo.getInteger("Humidity"));
-        } catch (Exception e) {
-            e.printStackTrace(); 
-            return 0;
-        }
-    
-    }
 
     public String getUsername(){
         return this.user;

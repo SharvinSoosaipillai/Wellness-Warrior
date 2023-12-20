@@ -23,11 +23,11 @@ public class Main_Menu {
                    thirdJPanel = new JPanel(new GridLayout(2, 2, 20, 20));
 
     private JLabel title = new JLabel("WELLNESS WARRIOR"), 
-                   heartText = new JLabel("HeartRate:" + this.user.getHeartRate()), 
-                   humidityText = new JLabel("Humidity:" + this.user.getHumidity()), 
-                   temperatureText = new JLabel("Temperature:" + this.user.getTemperature()), 
+                   heartText = new JLabel("HeartRate: " + this.user.getHeartRate()), 
+                   humidityText = new JLabel("Humidity: " + this.user.getHumidity()), 
+                   temperatureText = new JLabel("Temperature: " + this.user.getTemperature()), 
                    userText = new JLabel(this.user.getUsername()), 
-                   bloodText = new JLabel("Blood Concentration" + this.user.getBloodOxygen());
+                   bloodText = new JLabel("Blood % " + this.user.getBloodOxygen());
 
     private JButton exitButton = new JButton("Exit");
 
