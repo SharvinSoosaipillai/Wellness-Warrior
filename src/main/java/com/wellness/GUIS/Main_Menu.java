@@ -12,28 +12,24 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.wellness.Constants.Constants;
+import com.wellness.Backend.User;
+
 
 public class Main_Menu {
+    private User user = new User("Sharvin");
     private JFrame frame = new JFrame();
     private JPanel firstPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5)), 
                    secondJPanel = new JPanel(new BorderLayout()), 
                    thirdJPanel = new JPanel(new GridLayout(2, 2, 20, 20));
 
     private JLabel title = new JLabel("WELLNESS WARRIOR"), 
-                   heartText = new JLabel("HeartRate: 0"), 
-                   humidityText = new JLabel("get user humidity"), 
-                   temperatureText = new JLabel("get user temp"), 
-                   userText = new JLabel("get username"), 
-                   bloodText = new JLabel("get blood oxygen text");
+                   heartText = new JLabel("HeartRate:" + this.user.getHeartRate()), 
+                   humidityText = new JLabel("Humidity:" + this.user.getHumidity()), 
+                   temperatureText = new JLabel("Temperature:" + this.user.getTemperature()), 
+                   userText = new JLabel(this.user.getUsername()), 
+                   bloodText = new JLabel("Blood Concentration" + this.user.getBloodOxygen());
 
-    private JButton humidityTestButton = new JButton("Test Humidity"), 
-                    HeartRateTestButton = new JButton("Test Heartrate"),
-                    TemperatureTestButton = new JButton("Test Temperature"), 
-                    BloodOxygenTestButton = new JButton("Test BloodOxygen Levels"),
-                    exitButton = new JButton("Exit");
-
-
-
+    private JButton exitButton = new JButton("Exit");
 
 
     public Main_Menu() {
@@ -59,6 +55,7 @@ public class Main_Menu {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
         // Setting the title element
         this.title.setBackground(Constants.BACKGROUN_COLOR_1);

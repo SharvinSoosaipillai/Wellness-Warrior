@@ -8,7 +8,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 
-
 public class Validation {
     public boolean validatePassword(String username, String password,String confirmPassword, String connectionString){
         try (MongoClient mongoClient = MongoClients.create(connectionString)) {
