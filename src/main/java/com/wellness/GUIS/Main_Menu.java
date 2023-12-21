@@ -11,28 +11,35 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import com.wellness.Constants.Constants;
 import com.wellness.Backend.User;
 
 
 public class Main_Menu {
-    private User user = new User("Sharvin");
+
+    // elements part of the class
+    private User user;
+    private int test;
     private JFrame frame = new JFrame();
     private JPanel firstPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5)), 
                    secondJPanel = new JPanel(new BorderLayout()), 
                    thirdJPanel = new JPanel(new GridLayout(2, 2, 20, 20));
 
     private JLabel title = new JLabel("WELLNESS WARRIOR"), 
-                   heartText = new JLabel("HeartRate: " + this.user.getHeartRate()), 
-                   humidityText = new JLabel("Humidity: " + this.user.getHumidity()), 
-                   temperatureText = new JLabel("Temperature: " + this.user.getTemperature()), 
-                   userText = new JLabel(this.user.getUsername()), 
-                   bloodText = new JLabel("Blood % " + this.user.getBloodOxygen());
+                   heartText = new JLabel("HeartRate: "), 
+                   humidityText = new JLabel("Humidity: "), 
+                   temperatureText = new JLabel("Temperature:"), 
+                   userText = new JLabel(),
+                   bloodText = new JLabel("Blood %:");
 
     private JButton exitButton = new JButton("Exit");
 
 
-    public Main_Menu() {
+    public Main_Menu(User username) {
+        this.user = username;
         initialize();
     }
 
@@ -56,12 +63,20 @@ public class Main_Menu {
             e.printStackTrace();
         }
 
+        this.test = 0;
 
         // Setting the title element
         this.title.setBackground(Constants.BACKGROUN_COLOR_1);
         this.title.setForeground(Constants.TEXT_COLOR);
         this.title.setFont(new Font("Dialog", Font.BOLD, 40));
         this.title.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // Setting text element values
+        this.heartText.setText("HeartRate: "+ this.user.getHeartRate());
+        this.humidityText.setText("humidity: " + this.user.getHumidity());
+        this.userText.setText(this.user.getUsername());
+        this.temperatureText.setText("Temperature: " + this.user.getTemperature());
+        this.bloodText.setText("Blood %: " + this.user.getBloodOxygen());
 
         // JPanel1 Code
         Dimension preferredJPaneloneSize = new Dimension(200, 600);
@@ -95,8 +110,6 @@ public class Main_Menu {
         this.frame.add(thirdJPanel, BorderLayout.CENTER);
 
         // Adding components to the third JPanel
-
-        
         this.thirdJPanel.add(createButtonWithImage("misc/Images/Heart_Icon.png", 64, 64, "Test Heart Rate"));
         this.thirdJPanel.add(createButtonWithImage("misc/Images/Humidity_Icon.png", 64, 64, "Test Humidity"));
         this.thirdJPanel.add(createButtonWithImage("misc/Images/Temperature_Icon.png", 64, 64, "Test Temperature"));
@@ -106,10 +119,12 @@ public class Main_Menu {
 
 
 
+    // rescaling image function
     private ImageIcon createScaledImageIcon(String imagePath, int width, int height) {
         return new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
     }
 
+    // creating new Label Icon
     private JLabel createJLabel(ImageIcon icon) {
         return new JLabel(icon);
     }
@@ -118,20 +133,51 @@ public class Main_Menu {
         JButton button = new JButton(buttonText);
         button.setBackground(Constants.BLACK);
         ImageIcon icon = createScaledImageIcon(imagePath, width, height);
-  
+
+        // set button attributes
         button.setIcon(icon);
         button.setHorizontalTextPosition(SwingConstants.CENTER);
         button.setVerticalTextPosition(SwingConstants.BOTTOM);
         button.setForeground(Constants.TEXT_COLOR2);
-        button.setFont(new Font("Dialog", Font.BOLD, 20)); 
-        button.setIconTextGap(20); 
+        button.setFont(new Font("Dialog", Font.BOLD, 20));
+        button.setIconTextGap(20);
         button.setFocusPainted(false);
 
+        // Add ActionListener to the button
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Handle button click event
+                if (e.getSource() == button) {
+                    // Perform actions based on which button was clicked
+                    if ("Test Heart Rate".equals(buttonText)) {
+                        Main_Menu.this.frame.dispose();
+                        test = 1;
+                        Test_Data collectData = new Test_Data(test, user);
+                    } else if ("Test Humidity".equals(buttonText)) {
+
+                        Main_Menu.this.frame.dispose();
+                        test = 2;
+                        Test_Data collectData = new Test_Data(test,user);
+                    } else if ("Test Temperature".equals(test)) {
+
+                        Main_Menu.this.frame.dispose();
+                        test = 3;
+                        Test_Data collectData = new Test_Data(test,user);
+                    } else if ("Test Blood Level".equals(buttonText)) {
+
+                        Main_Menu.this.frame.dispose();
+                        test = 4;
+                        Test_Data collectData = new Test_Data(test,user);
+                    }
+                }
+            }
+        });
 
         return button;
     }
 
-
+    // Displays leftside stats about users health
     private void createIconPanel(String imagePath, int width, int height, JLabel textLabel) {
         ImageIcon icon = createScaledImageIcon(imagePath, width, height);
         JLabel iconLabel = createJLabel(icon);

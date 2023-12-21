@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.wellness.Backend.User;
 import com.wellness.Backend.Validation;
 import com.wellness.Constants.Constants;
 
@@ -127,7 +128,7 @@ public class Login extends JFrame{
                 
                 // checks to see if the information entered was valid
                 if (validator.checkUser(username,password, Constants.connectionString)){
-                    Main_Menu main = new Main_Menu();
+                    Main_Menu main = new Main_Menu(new User(username));
                     Login.this.frame.dispose();
 
 

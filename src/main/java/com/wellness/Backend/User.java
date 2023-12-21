@@ -19,9 +19,11 @@ public class User {
         this.user = userName;
     }
 
-    protected int HeartRate,bloodLevel, humdity, temperature;
+    //  user information variables 
+    protected int heartRate,bloodLevel, humdity, temperature;
 
 
+    // Gets the users info from the database
     private Document getUserInfoFromDatabase(String field) {
         try (MongoClient mongoClient = MongoClients.create(Constants.connectionString)) {
             MongoDatabase database = mongoClient.getDatabase("WellnessWarrior-db");
@@ -33,29 +35,35 @@ public class User {
         }
     }
 
+    // Return heartRate
     public int getHeartRate() {
         Document userInfo = getUserInfoFromDatabase("HeartRate");
-        return (userInfo != null) ? userInfo.getInteger("HeartRate", 0) : 0;
+        this.heartRate = userInfo.getInteger("HeartRate", 0);
+        return this.heartRate;
     }
 
-
+    // return temperature 
     public int getTemperature() {
         Document userInfo = getUserInfoFromDatabase("Temperature");
-        return (userInfo != null) ? userInfo.getInteger("Temperature", 0) : 0;
+        this.temperature = userInfo.getInteger("Temperature", 0);
+        return this.temperature;
     }
 
+    // return humidity level
     public int getHumidity() {
         Document userInfo = getUserInfoFromDatabase("Humidity");
-        return (userInfo != null) ? userInfo.getInteger("Humidity", 0) : 0;
+        this.humdity = userInfo.getInteger("Humidity", 0);
+        return this.humdity;
     }
 
-
+    // return bloodoxygen level
     public int getBloodOxygen() {
         Document userInfo = getUserInfoFromDatabase("BloodOxygenConcentration");
-        return (userInfo != null) ? userInfo.getInteger("BloodOxygenConcentration", 0) : 0;
+        this.bloodLevel = userInfo.getInteger("BloodOxygenConcentration", 0);
+        return this.bloodLevel;
     }
 
-
+    // return username
     public String getUsername(){
         return this.user;
     }

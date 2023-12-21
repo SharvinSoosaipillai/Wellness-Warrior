@@ -20,8 +20,7 @@ public class App
             @Override
 
             public void run(){
-                //Login main = new Login();
-                Main_Menu main = new Main_Menu();
+                Login main = new Login();
             }
 
         });
