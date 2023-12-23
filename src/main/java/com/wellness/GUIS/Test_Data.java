@@ -13,8 +13,7 @@ public class Test_Data extends JFrame {
 
     private int testType;
     private User user;
-    private JButton startButton = new JButton("Start"),
-            stopButton = new JButton("Stop"),
+    private JButton stopButton = new JButton("Stop"),
             confirmButton = new JButton("Confirm"),
             restartButton = new JButton("Restart"),
             exitButton = new JButton("Exit");
@@ -38,11 +37,14 @@ public class Test_Data extends JFrame {
         setTitle("Graph Animation");
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        initializeImageFrame(); // Initialize the image display frame
         initializeGraph(); // Initialize the graph components
 
-        // ... (your existing code)
+        setVisible(true);
+
+
+        initializeImageFrame(); // Initialize the image display frame
+        
+        
 
         dataPoints = new ArrayList<>();
 
@@ -90,12 +92,12 @@ public class Test_Data extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                
                 startAnimation();
             }
         });
     }
 
-    // Rest of your existing code...
 
     private void updateGraph() {
         // Update the function here (replace with your own function)
