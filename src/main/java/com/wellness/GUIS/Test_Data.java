@@ -34,9 +34,24 @@ public class Test_Data extends JFrame {
 
         this.testType = Type_of_Test;
         this.user = username;
-        setTitle("Graph Animation");
+        switch (this.testType) {
+            case 1:
+                setTitle("HeartRate Test");
+                break;
+            case 2: 
+                setTitle("Blood Oxygen Test");
+                break;
+            case 3:
+                setTitle("Humidity Test");
+                break;
+            case 4:
+                setTitle("Temperature Test");
+                break;
+        }
+
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         initializeGraph(); // Initialize the graph components
 
         setVisible(true);
@@ -60,9 +75,9 @@ public class Test_Data extends JFrame {
 
     // Initialize the image display frame
     private void initializeImageFrame() {
-        imageFrame = new JFrame("Image Display");
-        imageFrame.setSize(400, 300);
-        imageFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.imageFrame = new JFrame("Image Display");
+        this.imageFrame.setSize(400, 300);
+        this.imageFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Load an image (replace "your_image_file_path" with the actual path)
         ImageIcon imageIcon = new ImageIcon("misc/Images/Heart_Icon.png");
@@ -84,7 +99,50 @@ public class Test_Data extends JFrame {
 
     // Initialize the graph components
     private void initializeGraph() {
-        // You can add any initialization code for the graph here
+        // Set layout manager for the main frame
+        setLayout(new BorderLayout());
+
+        // create a new frame and add components there
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(stopButton);
+        buttonPanel.add(restartButton);
+
+
+        JPanel exitPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        exitPanel.add(exitButton);
+
+        // Add the exit panel to the NORTH 
+        add(exitPanel, BorderLayout.NORTH);
+
+        // Add the button panel to the SOUTH
+        add(buttonPanel, BorderLayout.SOUTH);
+
+        // Add action listeners for buttons
+        stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                stopAnimation();
+            }
+        });
+
+        restartButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                restartAnimation();
+            }
+        });
+
+        
+    }
+
+    private void stopAnimation() {
+        timer.stop();
+    }
+
+    private void restartAnimation() {
+        currentTime = 0;
+        dataPoints.clear();
+        timer.start();
     }
 
     private void showGraphAfterImageClosed() {

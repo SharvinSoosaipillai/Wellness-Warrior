@@ -19,7 +19,6 @@ public class App
             public void run(){
                 User user = new User("Sharvin");
                 Test_Data testData = new Test_Data(1, user);
-                // testData.setVisible(true);
             }
 
         });
