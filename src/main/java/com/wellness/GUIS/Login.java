@@ -21,6 +21,7 @@ import com.wellness.Backend.User;
 import com.wellness.Backend.Validation;
 import com.wellness.Constants.Constants;
 
+
 public class Login extends JFrame{
 
     private JFrame frame = new JFrame();
