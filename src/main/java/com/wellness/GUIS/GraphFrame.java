@@ -5,23 +5,11 @@ import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortTimeoutException;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import com.wellness.Backend.User;
-
 
 
 public class GraphFrame extends JFrame {
@@ -29,13 +17,13 @@ public class GraphFrame extends JFrame {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
     private int currentTime = 0, step = 5;
-    private JButton stopButton = new JButton("Stop");
-    private JButton restartButton = new JButton("Restart");
-    private JButton exitButton = new JButton("Exit");
+    private JButton stopButton = new JButton("Stop"), restartButton = new JButton("Restart"), exitButton = new JButton("Exit");
     private SerialPort serialPort;
     private InputStream inputStream;
     private Timer timer;
     private List<Point> dataPoints;
+
+
 
     public GraphFrame() {
         setTitle("Graph Frame");
@@ -48,7 +36,7 @@ public class GraphFrame extends JFrame {
 
         serialPort = SerialPort.getCommPort("COM3");
         
-        serialPort.setBaudRate(9600); // Set your Arduino's baud rate
+        serialPort.setBaudRate(9600); 
         serialPort.setNumDataBits(8);
         serialPort.setNumStopBits(1);
         serialPort.setParity(SerialPort.NO_PARITY);
@@ -85,7 +73,7 @@ public class GraphFrame extends JFrame {
                             int bytesRead = inputStream.read(buffer);
                             processSerialData(buffer, bytesRead);
                         } else {
-                            Thread.sleep(10);
+                            Thread.sleep(500);
                         }
                     }
                 } catch (SerialPortTimeoutException e ){
@@ -105,9 +93,7 @@ public class GraphFrame extends JFrame {
         try {
             if (bytesRead > 0) {
                 String data = new String(buffer, 0, bytesRead);
-                System.out.println("Received data: " + data);
-                int sensorValue = Integer.parseInt(data);
-                updateGraph(sensorValue);
+                updateGraph(Integer.parseInt(data));
             } else {
                 System.err.println("Received empty data from serial port.");
             }
@@ -132,12 +118,16 @@ public class GraphFrame extends JFrame {
     }
 
     private void updateGraph(int sensorValue) {
-        //int yOffset = (int) (Math.sin(Math.toRadians(currentTime)) * HEIGHT / 4);
-        dataPoints.add(new Point(currentTime, HEIGHT / 2 - sensorValue));
-        currentTime += step;
-        if (currentTime >= WIDTH) {
-            currentTime = 0;
-            dataPoints.clear();
+
+        if (sensorValue != 0){
+            dataPoints.add(new Point(currentTime, HEIGHT / 2 - sensorValue));
+        
+
+            currentTime += step;
+            if (currentTime >= WIDTH) {
+                currentTime = 0;
+                dataPoints.clear();
+            }
         }
     }
 
@@ -181,26 +171,30 @@ public class GraphFrame extends JFrame {
         drawGraph(g);
     }
 
+
     private void drawAxis(Graphics g) {
         int centerY = HEIGHT / 2;
-        int xAxisLabelY = centerY + 30;
-
         g.setColor(Color.BLACK);
-        g.drawLine(0, 0, 0, HEIGHT);
-        g.drawString("Y", 5, 15);
+        g.drawLine(5, 0, 5, HEIGHT);
+        g.drawString("Y", 30, 15);
 
         g.drawLine(0, centerY, WIDTH, centerY);
-        g.drawString("Time", WIDTH - 30, xAxisLabelY);
+        g.drawString("Time", WIDTH - 30, centerY);
 
-        for (int i = -HEIGHT / 2; i <= HEIGHT / 2; i += HEIGHT / 10) {
-            g.drawString(Integer.toString(i), 5, centerY - i);
+        int desiredYAxisPoints = 30;  
+        int yAxisLabelIncrement = HEIGHT / desiredYAxisPoints;
+        int yLabelValue = -((desiredYAxisPoints / 2) * 24);
+
+        for (int i = desiredYAxisPoints / 2; i >= -desiredYAxisPoints / 2; i--) {
+            g.drawString(Integer.toString(yLabelValue), 10, centerY + i * yAxisLabelIncrement);
+            yLabelValue += 24;
         }
 
-        int labelIncrement = WIDTH / 5;
-        for (int i = 0; i <= 5; i++) {
+        int labelIncrement = WIDTH / 30;
+        for (int i = 0; i <= 30; i++) {
             int timeLabel = i;
-            g.drawString(Integer.toString(timeLabel), i * labelIncrement + 10, xAxisLabelY);
+            g.drawString(Integer.toString(timeLabel), i * labelIncrement + 10, centerY);
         }
     }
-}
 
+}
