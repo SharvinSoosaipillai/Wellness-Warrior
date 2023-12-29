@@ -92,15 +92,23 @@ public class GraphFrame extends JFrame {
     private void processSerialData(byte[] buffer, int bytesRead) {
         try {
             if (bytesRead > 0) {
-                String data = new String(buffer, 0, bytesRead);
-                updateGraph(Integer.parseInt(data));
+                String data = new String(buffer, 0, bytesRead).trim(); // Remove leading/trailing whitespaces
+                if (data.contains("\"")){
+                    data.replace("\"", "");
+                }
+                updateGraph(Integer.parseInt(data));               
+ 
             } else {
                 System.err.println("Received empty data from serial port.");
             }
         } catch (NumberFormatException e) {
             System.err.println("Invalid data format: " + e.getMessage());
+
+
         }
     }
+
+
 
 
     private void startAnimation() {
