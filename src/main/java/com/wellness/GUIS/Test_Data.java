@@ -45,9 +45,9 @@ public class Test_Data extends JFrame {
 
         try {
             if (testType > 2) {
-                originalImage = ImageIO.read(new File("misc/Images/Icon.png"));
-            } else {
                 originalImage = ImageIO.read(new File("misc/Images/Temperature_And_Humidity_Circuit.png"));
+            } else {
+                originalImage = ImageIO.read(new File("misc/Images/Heartrate_And_BloodOxygen_Circuit.png"));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -65,14 +65,17 @@ public class Test_Data extends JFrame {
             g.setFont(new Font("Arial", Font.BOLD, 10));
 
             String text1 = "Please construct the following circuit";
-            String text2 = "When finished, click this screen to continue";
+            String text2 = "And flash arduino with appropriate code before beginning";
+            String text3 = "When finished, click this screen to continue";
 
             int textX = 20;
             int textY1 = 40;
-            int textY2 = 60;
+            int textY2 = 50;
+            int textY3 = 60;
 
             g.drawString(text1, textX, textY1);
             g.drawString(text2, textX, textY2);
+            g.drawString(text3, textX, textY3);
             g.dispose();
 
             ImageIcon resizedImageIcon = new ImageIcon(bufferedImage);

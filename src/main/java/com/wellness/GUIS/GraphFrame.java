@@ -108,7 +108,7 @@ public class GraphFrame extends JFrame {
                 updateGraph(Integer.parseInt(data));               
  
             } else {
-                System.err.println("Received empty data from serial port.");
+                System.err.println("Received empty data from serial port. Ensure device is plugged in.");
             }
         } catch (NumberFormatException e) {
             System.err.println("Invalid data format: " + e.getMessage());
@@ -258,7 +258,6 @@ public class GraphFrame extends JFrame {
             case 3:
                 this.user.setHeartRate((int)average);
                 home();
-                
                 break;
 
             case 4:

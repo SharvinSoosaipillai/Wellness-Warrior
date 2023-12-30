@@ -19,7 +19,7 @@ public class App
             public void run(){
                 // Login login = new Login();
                 User user = new User("Sharvin");
-                Test_Data testData = new Test_Data(3, user);
+                Test_Data testData = new Test_Data(1, user);
             }
 
         });
