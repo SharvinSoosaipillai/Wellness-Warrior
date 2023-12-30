@@ -11,21 +11,31 @@ import javax.swing.*;
 import java.io.IOException;
 import java.io.InputStream;
 
+import com.wellness.Backend.User;
+
 
 public class GraphFrame extends JFrame {
 
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
     private int currentTime = 0, step = 5;
-    private JButton stopButton = new JButton("Stop"), restartButton = new JButton("Restart"), exitButton = new JButton("Exit");
+    private JButton stopButton = new JButton("Stop"), 
+                    restartButton = new JButton("Restart"), 
+                    exitButton = new JButton("Exit"),
+                    saveButton = new JButton("Save");
     private SerialPort serialPort;
     private InputStream inputStream;
     private Timer timer;
     private List<Point> dataPoints;
+    private int test, totalValues, totalSum;
+    private User user;
+    private JLabel averageLabel = new JLabel("Average Value: ");
+    private boolean readingData = true;
+    private double average;
 
 
 
-    public GraphFrame() {
+    public GraphFrame(int testType, User username) {
         setTitle("Graph Frame");
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,8 +44,7 @@ public class GraphFrame extends JFrame {
         dataPoints = new ArrayList<>();
 
 
-        serialPort = SerialPort.getCommPort("COM3");
-        
+        serialPort = SerialPort.getCommPort("COM3");        
         serialPort.setBaudRate(9600); 
         serialPort.setNumDataBits(8);
         serialPort.setNumStopBits(1);
@@ -44,8 +53,8 @@ public class GraphFrame extends JFrame {
         serialPort.openPort();
         inputStream = serialPort.getInputStream();
 
-
-
+        this.test = testType;
+        this.user = username;
         timer = new Timer(50, e -> {
             updateGraph(0);
             startReadingData();
@@ -67,7 +76,7 @@ public class GraphFrame extends JFrame {
             @Override
             protected Void doInBackground() throws Exception {
                 try {
-                    while (true) {
+                    while (readingData) {
                         if (inputStream.available() > 0) {
                             byte[] buffer = new byte[1024];
                             int bytesRead = inputStream.read(buffer);
@@ -109,33 +118,53 @@ public class GraphFrame extends JFrame {
     }
 
 
-
-
     private void startAnimation() {
         timer.start();
     }
 
     private void stopAnimation() {
         timer.stop();
+        readingData = false;
     }
 
     private void restartAnimation() {
         currentTime = 0;
+        totalSum = 0;
+        totalValues = 0;
         dataPoints.clear();
         timer.start();
+        readingData = true;
     }
 
     private void updateGraph(int sensorValue) {
 
         if (sensorValue != 0){
             dataPoints.add(new Point(currentTime, HEIGHT / 2 - sensorValue));
-        
+            totalSum += sensorValue;
+            totalValues++;
 
             currentTime += step;
             if (currentTime >= WIDTH) {
                 currentTime = 0;
                 dataPoints.clear();
             }
+        }
+
+        average = totalSum / (double) totalValues;
+        averageLabel.setText("Average Value: " + String.format("%.2f", average));
+        switch (this.test) {
+            case 1:
+                averageLabel.setText(averageLabel.getText() + " BPM");
+                break;
+            case 2:
+                averageLabel.setText(averageLabel.getText() + " %");
+                break;
+            case 3:
+                averageLabel.setText(averageLabel.getText() + " °C");
+                break;
+            case 4:
+                averageLabel.setText(averageLabel.getText() + " %");
+                break;
         }
     }
 
@@ -153,16 +182,19 @@ public class GraphFrame extends JFrame {
         setLayout(new BorderLayout());
         setResizable(false);
 
-        // create a new frame and add components there
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(stopButton);
-        buttonPanel.add(restartButton);
-
+        // Create the exit panel with FlowLayout and right alignment
         JPanel exitPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         exitPanel.add(exitButton);
+        exitPanel.add(averageLabel);
 
         // Add the exit panel to the NORTH
         add(exitPanel, BorderLayout.NORTH);
+
+        // create a new panel for buttons
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(stopButton);
+        buttonPanel.add(restartButton);
+        buttonPanel.add(saveButton);
 
         // Add the button panel to the SOUTH
         add(buttonPanel, BorderLayout.SOUTH);
@@ -170,7 +202,11 @@ public class GraphFrame extends JFrame {
         // Add action listeners for buttons
         restartButton.addActionListener(e -> restartAnimation());
         stopButton.addActionListener(e -> stopAnimation());
+        saveButton.addActionListener(e -> saveData(this.test, average));
+        exitButton.addActionListener(e -> home());
     }
+
+
 
     @Override
     public void paint(Graphics g) {
@@ -203,6 +239,42 @@ public class GraphFrame extends JFrame {
             int timeLabel = i;
             g.drawString(Integer.toString(timeLabel), i * labelIncrement + 10, centerY);
         }
+    }
+
+
+    public void saveData(int testType, double average){
+
+        switch (testType) {
+            case 1:
+                this.user.setHeartRate((int)average);
+                home();
+                break;
+
+            case 2:
+                this.user.setHeartRate((int)average);
+                home();                
+                break;
+
+            case 3:
+                this.user.setHeartRate((int)average);
+                home();
+                
+                break;
+
+            case 4:
+                this.user.setHeartRate((int)average);
+                home();                
+                break;
+        }
+
+    }
+
+    public void home(){
+        stopAnimation();
+        setVisible(false);
+        dispose();
+        Main_Menu menu = new Main_Menu(this.user);
+
     }
 
 }

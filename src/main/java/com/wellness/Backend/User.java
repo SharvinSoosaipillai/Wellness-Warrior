@@ -9,6 +9,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
 import com.wellness.Constants.Constants;
+import static com.mongodb.client.model.Filters.eq;
 
 public class User {
 
@@ -20,7 +21,7 @@ public class User {
     }
 
     //  user information variables 
-    protected int heartRate,bloodLevel, humdity, temperature;
+    protected int heartRate,bloodLevel, humidity, temperature;
 
 
     // Gets the users info from the database
@@ -52,8 +53,8 @@ public class User {
     // return humidity level
     public int getHumidity() {
         Document userInfo = getUserInfoFromDatabase("Humidity");
-        this.humdity = userInfo.getInteger("Humidity", 0);
-        return this.humdity;
+        this.humidity = userInfo.getInteger("Humidity", 0);
+        return this.humidity;
     }
 
     // return bloodoxygen level
@@ -67,6 +68,43 @@ public class User {
     public String getUsername(){
         return this.user;
     }
+    private void updateUserData(String field, int value) {
+        try (MongoClient mongoClient = MongoClients.create(Constants.connectionString)) {
+            MongoDatabase database = mongoClient.getDatabase("WellnessWarrior-db");
+            MongoCollection<Document> collection = database.getCollection("users");
+            
+            // Update the document in the collection
+            collection.updateOne(eq("username", this.user), new Document("$set", new Document(field, value)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Set humidity level in the database
+    public void setHumidity(int humidity) {
+        updateUserData("Humidity", humidity);
+        this.humidity = humidity; 
+    }
+
+    // Set temperature in the database
+    public void setTemperature(int temperature) {
+        updateUserData("Temperature", temperature);
+        this.temperature = temperature; 
+    }
+
+    // Set heart rate in the database
+    public void setHeartRate(int heartRate) {
+        updateUserData("HeartRate", heartRate);
+        this.heartRate = heartRate; 
+    }
+
+    // Set blood oxygen level in the database
+    public void setBloodOxygen(int bloodOxygen) {
+        updateUserData("BloodOxygenConcentration", bloodOxygen);
+        this.bloodLevel = bloodOxygen; // Update the local variable if needed
+    }
+
+
 
 
 }

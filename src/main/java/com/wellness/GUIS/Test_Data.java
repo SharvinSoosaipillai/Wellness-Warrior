@@ -95,7 +95,7 @@ public class Test_Data extends JFrame {
     private void showGraphAfterImageClosed() {
         SwingUtilities.invokeLater(() -> {
             if (graphFrame == null) {
-                graphFrame = new GraphFrame();
+                graphFrame = new GraphFrame(this.testType, this.user);
                 graphFrame.setVisible(true);
             }
         });
