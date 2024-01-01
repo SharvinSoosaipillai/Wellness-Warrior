@@ -94,6 +94,20 @@ public class Main_Menu {
         JPanel exitButtonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         exitButtonPanel.setOpaque(false); // Make the panel transparent
         exitButtonPanel.add(exitButton);
+        this.exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                if (e.getSource() == exitButton) {
+                    Main_Menu.this.frame.dispose();
+                    Login login = new Login();
+                }
+            }
+        });
+
+
+
+
 
         // Add the exitButtonPanel and title to the east (right) of secondJPanel
         this.secondJPanel.add(exitButtonPanel, BorderLayout.EAST);
