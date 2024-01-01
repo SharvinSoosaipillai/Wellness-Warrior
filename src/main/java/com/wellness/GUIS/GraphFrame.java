@@ -36,7 +36,7 @@ public class GraphFrame extends JFrame {
 
 
     public GraphFrame(int testType, User username) {
-        setTitle("Graph Frame");
+        setTitle("Graphing Data");
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

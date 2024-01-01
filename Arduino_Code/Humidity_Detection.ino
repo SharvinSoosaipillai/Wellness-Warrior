@@ -2,7 +2,7 @@
 
 // Define the pin to which the DHT sensor is connected
 #define DHTPIN 9
-// Define the type of DHT sensor
+// Define the type of DHT sensor 
 #define DHTTYPE DHT11
 
 // Create an instance of the DHT class
@@ -19,19 +19,18 @@ void setup()
 
 void loop()
 {
-    // Attempt to read the temperature value from the DHT sensor.
-    int temperature = dht.readTemperature();
+    // Attempt to read the humidity value from the DHT sensor.
+    float humidity = dht.readHumidity();
 
-
-    if (!isnan(temperature))
+    if (!isnan(humidity))
     {
-        // Send temperature as a plain string to the serial port
-        Serial.println(temperature);
-        
+        // Send humidity as a plain string to the serial port
+        Serial.println(humidity);
     }
     else
     {
-        Serial.println("Failed to read temperature from DHT sensor!");
+        Serial.println("Failed to read humidity from DHT sensor!");
     }
 
+    delay(1000);
 }
