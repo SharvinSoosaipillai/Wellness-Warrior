@@ -1,6 +1,6 @@
 # Wellness Warrior
 This is an all in one Java Health application that enables users to track realtime stats about their Heartrate, Humidity, Bloody Oxygen levels and Temperature. 
-The Java application on host device and forwards live data to Arduino (ATmega328) through USB serial. This system operates without the need of a WiFi module. All User data is stored in an internal file database, so that the program can be dynamically changed with user manipulation. 
+The Java application on host device and forwards live data to Arduino (ATmega328) through USB serial. This system operates without the need of a WiFi module. All user data is stored in an internal file database, so that the program can be dynamically changed with user manipulation. 
 
 # Configuration 
 Ensure that you have the latest version of Apache Maven downloaded, along with an up to date version of the Arduino IDE and its supported libraries (DHT11 and ProtoCentral Pulse Express with MAX30102 and MAX32664D)
