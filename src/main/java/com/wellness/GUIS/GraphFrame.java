@@ -38,6 +38,7 @@ public class GraphFrame extends JFrame {
     public GraphFrame(int testType, User username) {
         setTitle("Graphing Data");
         setSize(WIDTH, HEIGHT);
+        setIconImage(Toolkit.getDefaultToolkit().getImage("misc/Images/icon.png"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 

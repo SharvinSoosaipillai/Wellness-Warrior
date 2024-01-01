@@ -1,10 +1,5 @@
 package com.wellness;
-
-
 import com.wellness.GUIS.Login;
-
-
-
 import javax.swing.SwingUtilities;
 
 public class App 

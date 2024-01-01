@@ -4,7 +4,7 @@
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="c:\Users\mails\Desktop\Projects\wellnesswarrior\target\test-classes;c:\Users\mails\Desktop\Projects\wellnesswarrior\target\classes;C:\Users\mails\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\mails\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\mails\.m2\repository\io\github\cdimascio\dotenv-java\3.0.0\dotenv-java-3.0.0.jar;C:\Users\mails\.m2\repository\ch\qos\logback\logback-classic\1.2.6\logback-classic-1.2.6.jar;C:\Users\mails\.m2\repository\ch\qos\logback\logback-core\1.2.6\logback-core-1.2.6.jar;C:\Users\mails\.m2\repository\org\slf4j\slf4j-api\1.7.32\slf4j-api-1.7.32.jar;C:\Users\mails\.m2\repository\org\mongodb\mongodb-driver-sync\4.10.2\mongodb-driver-sync-4.10.2.jar;C:\Users\mails\.m2\repository\org\mongodb\bson\4.10.2\bson-4.10.2.jar;C:\Users\mails\.m2\repository\org\mongodb\mongodb-driver-core\4.10.2\mongodb-driver-core-4.10.2.jar;C:\Users\mails\.m2\repository\org\mongodb\bson-record-codec\4.10.2\bson-record-codec-4.10.2.jar;C:\Users\mails\.m2\repository\com\fazecast\jSerialComm\2.8.0\jSerialComm-2.8.0.jar;"/>
+    <property name="java.class.path" value="C:\Users\mails\Desktop\Projects\wellnesswarrior\target\test-classes;C:\Users\mails\Desktop\Projects\wellnesswarrior\target\classes;C:\Users\mails\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\mails\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\mails\.m2\repository\io\github\cdimascio\dotenv-java\3.0.0\dotenv-java-3.0.0.jar;C:\Users\mails\.m2\repository\ch\qos\logback\logback-classic\1.2.6\logback-classic-1.2.6.jar;C:\Users\mails\.m2\repository\ch\qos\logback\logback-core\1.2.6\logback-core-1.2.6.jar;C:\Users\mails\.m2\repository\org\slf4j\slf4j-api\1.7.32\slf4j-api-1.7.32.jar;C:\Users\mails\.m2\repository\org\mongodb\mongodb-driver-sync\4.10.2\mongodb-driver-sync-4.10.2.jar;C:\Users\mails\.m2\repository\org\mongodb\bson\4.10.2\bson-4.10.2.jar;C:\Users\mails\.m2\repository\org\mongodb\mongodb-driver-core\4.10.2\mongodb-driver-core-4.10.2.jar;C:\Users\mails\.m2\repository\org\mongodb\bson-record-codec\4.10.2\bson-record-codec-4.10.2.jar;C:\Users\mails\.m2\repository\com\fazecast\jSerialComm\2.8.0\jSerialComm-2.8.0.jar;"/>
     <property name="java.vm.vendor" value="Eclipse Adoptium"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -15,9 +15,9 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="CA"/>
     <property name="sun.boot.library.path" value="C:\Users\mails\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.8.7-hotspot\bin"/>
-    <property name="sun.java.command" value="C:\Users\mails\AppData\Local\Temp\surefire4847751369387399946\surefirebooter15680286171578548215.jar C:\Users\mails\AppData\Local\Temp\surefire4847751369387399946 2023-12-28T15-11-57_565-jvmRun1 surefire9188729706489571671tmp surefire_015889606667832893702tmp"/>
+    <property name="sun.java.command" value="C:\Users\mails\AppData\Local\Temp\surefire12016072607727738888\surefirebooter16649963230710363117.jar C:\Users\mails\AppData\Local\Temp\surefire12016072607727738888 2024-01-01T10-59-33_587-jvmRun1 surefire1090740428645582479tmp surefire_016991136371982992728tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="c:\Users\mails\Desktop\Projects\wellnesswarrior\target\test-classes;c:\Users\mails\Desktop\Projects\wellnesswarrior\target\classes;C:\Users\mails\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\mails\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\mails\.m2\repository\io\github\cdimascio\dotenv-java\3.0.0\dotenv-java-3.0.0.jar;C:\Users\mails\.m2\repository\ch\qos\logback\logback-classic\1.2.6\logback-classic-1.2.6.jar;C:\Users\mails\.m2\repository\ch\qos\logback\logback-core\1.2.6\logback-core-1.2.6.jar;C:\Users\mails\.m2\repository\org\slf4j\slf4j-api\1.7.32\slf4j-api-1.7.32.jar;C:\Users\mails\.m2\repository\org\mongodb\mongodb-driver-sync\4.10.2\mongodb-driver-sync-4.10.2.jar;C:\Users\mails\.m2\repository\org\mongodb\bson\4.10.2\bson-4.10.2.jar;C:\Users\mails\.m2\repository\org\mongodb\mongodb-driver-core\4.10.2\mongodb-driver-core-4.10.2.jar;C:\Users\mails\.m2\repository\org\mongodb\bson-record-codec\4.10.2\bson-record-codec-4.10.2.jar;C:\Users\mails\.m2\repository\com\fazecast\jSerialComm\2.8.0\jSerialComm-2.8.0.jar;"/>
+    <property name="surefire.test.class.path" value="C:\Users\mails\Desktop\Projects\wellnesswarrior\target\test-classes;C:\Users\mails\Desktop\Projects\wellnesswarrior\target\classes;C:\Users\mails\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\mails\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\mails\.m2\repository\io\github\cdimascio\dotenv-java\3.0.0\dotenv-java-3.0.0.jar;C:\Users\mails\.m2\repository\ch\qos\logback\logback-classic\1.2.6\logback-classic-1.2.6.jar;C:\Users\mails\.m2\repository\ch\qos\logback\logback-core\1.2.6\logback-core-1.2.6.jar;C:\Users\mails\.m2\repository\org\slf4j\slf4j-api\1.7.32\slf4j-api-1.7.32.jar;C:\Users\mails\.m2\repository\org\mongodb\mongodb-driver-sync\4.10.2\mongodb-driver-sync-4.10.2.jar;C:\Users\mails\.m2\repository\org\mongodb\bson\4.10.2\bson-4.10.2.jar;C:\Users\mails\.m2\repository\org\mongodb\mongodb-driver-core\4.10.2\mongodb-driver-core-4.10.2.jar;C:\Users\mails\.m2\repository\org\mongodb\bson-record-codec\4.10.2\bson-record-codec-4.10.2.jar;C:\Users\mails\.m2\repository\com\fazecast\jSerialComm\2.8.0\jSerialComm-2.8.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\mails"/>
     <property name="user.language" value="en"/>
@@ -25,12 +25,12 @@
     <property name="java.version.date" value="2023-07-18"/>
     <property name="java.home" value="C:\Users\mails\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.8.7-hotspot"/>
     <property name="file.separator" value="\"/>
-    <property name="basedir" value="c:\Users\mails\Desktop\Projects\wellnesswarrior"/>
+    <property name="basedir" value="C:\Users\mails\Desktop\Projects\wellnesswarrior"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\mails\AppData\Local\Temp\surefire4847751369387399946\surefirebooter15680286171578548215.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\mails\AppData\Local\Temp\surefire12016072607727738888\surefirebooter16649963230710363117.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.8+7"/>
@@ -45,7 +45,7 @@
     <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
     <property name="java.io.tmpdir" value="C:\Users\mails\AppData\Local\Temp\"/>
     <property name="java.version" value="17.0.8"/>
-    <property name="user.dir" value="c:\Users\mails\Desktop\Projects\wellnesswarrior"/>
+    <property name="user.dir" value="C:\Users\mails\Desktop\Projects\wellnesswarrior"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="sun.os.patch.level" value=""/>
